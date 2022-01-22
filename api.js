@@ -1,5 +1,5 @@
 /*
-write an api that grabs the powerhouse-brewery.csv files using fs and reduces the data to the credit card number and the unused value "Unredeemed 
+Write an api that grabs the original powerhouse-brewery.csv files using fs and reduces the data to the credit card number and the unused value "Unredeemed 
 Amount" and the  "Current Balance 
 As Of 01/13/2022" */
 
@@ -9,24 +9,20 @@ const require = createRequire(import.meta.url); // construct the require method
 const fs = require("fs"); //require file system methods
 const PATH_OLD_CSV = './powerhouse-brewery.csv';
 
-console.log(`The old csv file is ${PATH_OLD_CSV}`);
 // read the old csv file
 fs.readFile(PATH_OLD_CSV, 'utf8', (err, data) => {
     if (err) {
-        console.log('17 ');
-        console.log(err);
+        console.log(err); 
         return;
     }
     console.log(typeof data);
     // split the data into an array of lines
     const lines = data.split('\n');
-    // remove the first line
-    lines.shift();
-    // remove the last line
-    lines.pop();
-
+    lines.shift();   // remove the first line
+    lines.pop(); // remove the last line
+    
+//remove unnecessary data and create a new array of objects
 let categoriesJSON = [];
-
 lines.forEach(element => {
     if(element.length>40 && element[0] === "C"){
         let elementArray = element.split(',');
@@ -39,6 +35,7 @@ lines.forEach(element => {
         );
     }
 });
+//write categoriesJSON to a new JSON file
 fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON, null, "  "), (err) => {
     if (err) {
         console.log(err);
@@ -47,7 +44,7 @@ fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON,
     console.log('The file has been saved!');
 });
 
-//convert categoriesjson into a CSV file
+//convert CategoriesJSON into a CSV writable stream
 let categoriesCSV = 'Credit Card Number,Unredeemed Amount, Current Balance\n';
 categoriesJSON.forEach(element => {
     categoriesCSV += `${element.creditCardNumber},${element.unredeemedAmount},${element.currentBalance}\n`;
@@ -60,8 +57,8 @@ fs.writeFile('./powerhouse-brewery-reduced.csv', categoriesCSV, (err) => {
         return;
     }
     console.log('The file has been saved!');
+
 });
-//write categoriesJSON to a new file
 });
 
 
