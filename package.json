@@ -2,13 +2,20 @@
   "name": "gift-card-redemptions-api",
   "version": "1.0.0",
   "description": "gift card redemption api",
+  "type": "module",
   "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Molly Beach",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mollybeach/gift-card-redemptions-api/issues"
+  },
+  "homepage": "https://github.com/mollybeach/gift-card-redemptions-api",
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "file-saver": "^2.0.5",
+    "fs": "^0.0.1-security",
+    "node": "^17.3.1"
   }
 }
