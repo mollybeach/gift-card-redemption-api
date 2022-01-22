@@ -1,7 +1,5 @@
-/*
-Write an api that grabs the original powerhouse-brewery.csv files using fs and reduces the data to the credit card number and the unused value "Unredeemed 
-Amount" and the  "Current Balance 
-As Of 01/13/2022" */
+/* Write an api that grabs the original powerhouse-brewery.csv files using fs and reduces the data to the credit card number and the unused value "Unredeemed 
+Amount" and the "Current Balance " As Of 01/13/2022" */
 
 import console from "console";
 import { createRequire } from "module"; // add the ability to construct the'require' method in js file
@@ -20,7 +18,7 @@ fs.readFile(PATH_OLD_CSV, 'utf8', (err, data) => {
     const lines = data.split('\n');
     lines.shift();   // remove the first line
     lines.pop(); // remove the last line
-    
+
 //remove unnecessary data and create a new array of objects
 let categoriesJSON = [];
 lines.forEach(element => {
