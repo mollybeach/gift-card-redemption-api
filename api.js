@@ -33,10 +33,20 @@ lines.forEach(element => {
         );
     }
 });
-// if the same gift card number is found in the array, it will be replaced by the new one
+// check for the same gift card number 
+let giftCardNumberArray = [];
+categoriesJSON.forEach(element => {
+    if(giftCardNumberArray.includes(element.giftCardNumber)){
+        console.log(element.giftCardNumber);
+    }
+    else{
+        giftCardNumberArray.push(element.giftCardNumber);
+    }
+});
+/*
 categoriesJSON = categoriesJSON.filter((item, index) => {
     return categoriesJSON.findIndex(i => i.giftCardNumber === item.giftCardNumber) === index;
-});
+});*/
 //write categoriesJSON to a new JSON file
 fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON, null, "  "), (err) => {
     if (err) {
