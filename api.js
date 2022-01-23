@@ -22,12 +22,12 @@ fs.readFile(PATH_OLD_CSV, 'utf8', (err, data) => {
 //removes unnecessaryy data and create an new arrays of objects
 let categoriesJSON = [];
 lines.forEach(element => {
-    if(element.length>40 && element[0] === "C"){
+    if(element.length>40 && (element[0] === "C" || element[0] === "G")){
         let elementArray = element.split(',');
         categoriesJSON .push(
             {
                 "creditCardNumber": elementArray[1],
-                "unredeemedAmount": elementArray[15],
+                "redeemedAmount": elementArray[14],
                 "currentBalance": elementArray[16]
             }
         );
@@ -43,9 +43,9 @@ fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON,
 });
 
 //convert CategoriesJSON into a CSV writable stream
-let categoriesCSV = 'Credit Card Number,Unredeemed Amount, Current Balance\n';
+let categoriesCSV = 'Credit Card Number,Redeemed Amount, Current Balance\n';
 categoriesJSON.forEach(element => {
-    categoriesCSV += `${element.creditCardNumber},${element.unredeemedAmount},${element.currentBalance}\n`;
+    categoriesCSV += `${element.creditCardNumber},${element.redeemedAmount},${element.currentBalance}\n`;
 });
 
 //write the new csv file
