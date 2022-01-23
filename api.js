@@ -16,7 +16,7 @@ fs.readFile(PATH_OLD_CSV, 'utf8', (err, data) => {
     console.log(typeof data);
     // split the data into an array of lines
     const lines = data.split('\n');
-    lines.shift();   // remove the first line
+    lines.shift();   // remove the first lines
     lines.pop(); // remove the last line
 
 //remove unnecessary data and create a new array of objectss
