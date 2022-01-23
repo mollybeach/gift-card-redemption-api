@@ -1,4 +1,4 @@
-/* Write an api that grabs the original powerhouse-brewery.csv files using fs and reduces the data to the credit card number and the unused value "Unredeemed 
+/* Write an api that grabs the original powerhouse-brewery.csv files using fs and reduces the data to the gift card number and the unused value "Unredeemed 
 Amount" and the "Current Balance " As Of 01/13/2022" */
 
 import console from "console";
@@ -26,12 +26,16 @@ lines.forEach(element => {
         let elementArray = element.split(',');
         categoriesJSON .push(
             {
-                "creditCardNumber": elementArray[1],
+                "giftCardNumber": elementArray[1],
                 "redeemedAmount": elementArray[14],
                 "currentBalance": elementArray[16]
             }
         );
     }
+});
+// if the same gift card number is found in the array, it will be replaced by the new one
+categoriesJSON = categoriesJSON.filter((item, index) => {
+    return categoriesJSON.findIndex(i => i.giftCardNumber === item.giftCardNumber) === index;
 });
 //write categoriesJSON to a new JSON file
 fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON, null, "  "), (err) => {
@@ -43,9 +47,9 @@ fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON,
 });
 
 //convert CategoriesJSON into a CSV writable stream
-let categoriesCSV = 'Credit Card Number,Current Balance As Of 01/13/2022\n';
+let categoriesCSV = 'Gift Card Number, Current Balance As Of 01/13/2022\n';
 categoriesJSON.forEach(element => {
-    categoriesCSV += `${element.creditCardNumber},${element.currentBalance}\n`;
+    categoriesCSV += `${element.giftCardNumber},${element.currentBalance}\n`;
 });
 
 //write the new csv file
