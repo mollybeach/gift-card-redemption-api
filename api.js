@@ -19,7 +19,7 @@ fs.readFile(PATH_OLD_CSV, 'utf8', (err, data) => {
     lines.shift();   // remove the first line
     lines.pop(); // remove the last line
 
-//remove unnecessary data and create a new array of objects
+//remove unnecessary data and create a new array of objectss
 let categoriesJSON = [];
 lines.forEach(element => {
     if(element.length>40 && element[0] === "C"){
