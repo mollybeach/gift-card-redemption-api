@@ -43,9 +43,9 @@ fs.writeFile('./powerhouse-brewery-reduced.json', JSON.stringify(categoriesJSON,
 });
 
 //convert CategoriesJSON into a CSV writable stream
-let categoriesCSV = 'Credit Card Number,Redeemed Amount, Current Balance\n';
+let categoriesCSV = 'Credit Card Number,Current Balance As Of 01/13/2022\n';
 categoriesJSON.forEach(element => {
-    categoriesCSV += `${element.creditCardNumber},${element.redeemedAmount},${element.currentBalance}\n`;
+    categoriesCSV += `${element.creditCardNumber},${element.currentBalance}\n`;
 });
 
 //write the new csv file
